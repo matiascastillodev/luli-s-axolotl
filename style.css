@@ -70,6 +70,12 @@ button:hover {
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
 }
 
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .pet {
   width: 100%;
 }
@@ -82,7 +88,6 @@ img {
 @media (max-width: 425px) {
   img {
     width: 30px;
-    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
   }
 
   .statsRow {
