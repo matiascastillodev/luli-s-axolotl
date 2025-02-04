@@ -78,9 +78,6 @@ function resetGame() {
   pet.hunger = 5;
   pet.health = 7;
   pet.energy = 5;
-  pet.isSleeping = false;
-  pet.healthIncreaseInterval = null;
-  pet.gameOver = false;
   gameStart();
 }
 
