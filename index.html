@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luanne's Virtual Pets</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 id="petName">Axolotl</h1>
+    <p>00:00:00</p>
+    <div class="pet-display">
+      <img src="images/Axolotl_Idle_Floor_Underwater.webp" alt="" class="pet" />
+    </div>
+
+    <div class="statsContainer">
+      <div class="statsRow">
+        <div id="sleepBar">
+          <img src="images/Clock_texture_JE1_BE1.webp" alt="" />
+        </div>
+        <div id="playBar">
+          <img src="images/Mob_Heart.webp" alt="" /><img
+            src="images/Mob_Heart.webp"
+            alt=""
+          /><img src="images/Mob_Heart.webp" alt="" />
+        </div>
+      </div>
+      <div class="statsRow">
+        <div id="healthBar">
+          <img src="images/Heart.webp" alt="" /><img
+            src="images/Heart.webp"
+            alt=""
+          /><img src="images/Heart.webp" alt="" /><img
+            src="images/Heart.webp"
+            alt=""
+          /><img src="images/Heart.webp" alt="" /><img
+            src="images/Heart.webp"
+            alt=""
+          /><img src="images/Heart.webp" alt="" />
+        </div>
+        <div id="hungerBar">
+          <img src="images/Hunger.webp" alt="" /><img
+            src="images/Hunger.webp"
+            alt=""
+          /><img src="images/Hunger.webp" alt="" /><img
+            src="images/Hunger.webp"
+            alt=""
+          /><img src="images/Hunger.webp" alt="" /><img
+            src="images/Hunger.webp"
+            alt=""
+          /><img src="images/Hunger.webp" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="btnContainer">
+      <button id="feedBtn">
+        <img src="images/Bucket_of_Tropical_Fish_JE3_BE2.webp" alt="Feed" />FEED
+      </button>
+      <button id="sleepBtn">
+        <img
+          src="images/Bucket_of_Axolotl_JE1_BE1.webp"
+          alt="Wake"
+          id="sleepIcon"
+        />
+        <span id="statusText">WAKE</span>
+      </button>
+      <button id="playBtn">
+        <img src="images/Lead_JE2_BE2.webp" alt="Play" />PLAY
+      </button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

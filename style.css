@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+}
+
+@font-face {
+  font-family: "Minecraft";
+  src: url(font/Minecraft.ttf);
+}
+
+body {
+  background-color: #e6eff4;
+  margin: 20px auto;
+  max-width: 640px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  font-family: "Minecraft";
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.pet-display {
+  object-fit: contain;
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.statsRow {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+button {
+  background-color: #508b69;
+  border: 2px solid #344b3f;
+  padding: 10px;
+  min-width: 150px;
+  color: #fff;
+  font-family: "Minecraft";
+  font-size: 1rem;
+  letter-spacing: 2px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
+}
+
+.pet {
+  width: 100%;
+}
+
+img {
+  width: 40px;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
+}
+
+@media (max-width: 425px) {
+  img {
+    width: 30px;
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2));
+  }
+
+  .statsRow {
+    flex-direction: column;
+  }
+
+  .btnContainer {
+    flex-direction: column;
+  }
+}
