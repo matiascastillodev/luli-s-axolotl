@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="gameStart" class="modal">
+      <div class="modal-content">
+        <h2>Enter Pet Name</h2>
+        <input type="text" id="petNameInput" placeholder="Enter pet name" />
+        <button id="setNameBtn">Set Name</button>
+      </div>
+    </div>
+
     <h1 id="petName">Axolotl</h1>
     <p>00:00:00</p>
     <div class="pet-display">
@@ -64,6 +72,15 @@
       <button id="playBtn">
         <img src="images/Lead_JE2_BE2.webp" alt="Play" />PLAY
       </button>
+    </div>
+
+    <div id="gameOver" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>Game Over</h2>
+        <p>Your pet has died.</p>
+        <button id="restartBtn">Restart</button>
+      </div>
     </div>
 
     <script src="script.js" type="module"></script>

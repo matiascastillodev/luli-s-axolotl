@@ -1,8 +1,7 @@
 import { Pet } from "./pet.js";
 
+let pet;
 let mainImg = document.querySelector(".pet");
-
-const pet = new Pet("Axolotl");
 
 const feedBtn = document.getElementById("feedBtn");
 const playBtn = document.getElementById("playBtn");
@@ -64,6 +63,47 @@ function updateButtonsState() {
   }
 }
 
-updateStats();
+function gameOver() {
+  const modal = document.getElementById("gameOver");
+  modal.style.display = "block";
 
-export { updateStats };
+  const restartBtn = document.getElementById("restartBtn");
+  restartBtn.onclick = function () {
+    modal.style.display = "none";
+    resetGame();
+  };
+}
+
+function resetGame() {
+  pet.hunger = 5;
+  pet.health = 7;
+  pet.energy = 5;
+  pet.isSleeping = false;
+  pet.healthIncreaseInterval = null;
+  pet.gameOver = false;
+  gameStart();
+}
+
+function gameStart() {
+  const modal = document.getElementById("gameStart");
+  modal.style.display = "block";
+
+  const setNameBtn = document.getElementById("setNameBtn");
+  setNameBtn.onclick = function () {
+    const petNameInput = document.getElementById("petNameInput").value;
+    if (petNameInput) {
+      document.getElementById("petName").textContent = petNameInput;
+      modal.style.display = "none";
+      startGame(petNameInput);
+    }
+  };
+}
+
+function startGame(petName) {
+  pet = new Pet(petName);
+  updateStats();
+}
+
+gameStart();
+
+export { updateStats, gameOver };

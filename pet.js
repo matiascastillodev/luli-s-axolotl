@@ -1,12 +1,14 @@
-import { updateStats } from "./script.js";
+import { updateStats, gameOver } from "./script.js";
 
 class Pet {
   constructor(name) {
     this.name = name;
-    this.hunger = 1;
+    this.hunger = 5;
     this.health = 7;
     this.energy = 5;
     this.isSleeping = false;
+    this.healthIncreaseInterval = null;
+    this.gameOver = false;
 
     this.startGameLoop();
   }
@@ -14,25 +16,56 @@ class Pet {
   startGameLoop() {
     setInterval(() => {
       this.hunger = Math.max(0, this.hunger - 1);
-      this.checkHealth();
-      this.checkEnergy();
       updateStats();
-    }, 5000);
+    }, 14000);
+
+    setInterval(() => {
+      if (!this.isSleeping) {
+        this.energy = Math.max(0, this.energy - 1);
+        this.checkEnergy();
+        updateStats();
+      }
+    }, 24000);
+
+    setInterval(() => {
+      this.checkHealth();
+    }, 1000);
   }
 
   checkHealth() {
-    if (this.hunger === 0 || (this.energy === 0 && !this.isSleeping)) {
+    if (
+      this.hunger === 0 ||
+      (this.energy === 0 && !this.isSleeping) ||
+      this.energy === 7
+    ) {
       this.health = Math.max(0, this.health - 1);
       updateStats();
       if (this.health === 0) {
-        console.log("Pet has died.");
+        this.gameOver = true;
+        clearInterval(this.hungerInterval);
+        clearInterval(this.energyInterval);
+        clearInterval(this.healthInterval);
+        gameOver();
       }
-      setInterval(() => {
-        if (this.hunger === 7 && this.energy > 0) {
-          this.health = Math.min(7, this.health + 1);
-          updateStats();
-        }
-      }, 2000);
+    }
+
+    if (this.hunger === 7 && this.energy > 0) {
+      if (!this.healthIncreaseInterval) {
+        this.healthIncreaseInterval = setInterval(() => {
+          if (this.health < 7) {
+            this.health = Math.min(7, this.health + 1);
+            updateStats();
+          } else {
+            clearInterval(this.healthIncreaseInterval);
+            this.healthIncreaseInterval = null;
+          }
+        }, 1000);
+      }
+    } else {
+      if (this.healthIncreaseInterval) {
+        clearInterval(this.healthIncreaseInterval);
+        this.healthIncreaseInterval = null;
+      }
     }
   }
 
