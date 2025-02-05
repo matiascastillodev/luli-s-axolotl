@@ -1,4 +1,4 @@
-import { updateStats, gameOver } from "./script.js";
+import { updateStats } from "./script.js";
 
 class Pet {
   constructor(name) {
@@ -11,38 +11,6 @@ class Pet {
     this.maxEnergy = 7;
     this.isSleeping = false;
     this.healthIncreaseInterval = null;
-  }
-  checkHealth() {
-    if (
-      this.hunger === 0 ||
-      (this.energy === 0 && !this.isSleeping) ||
-      this.energy === this.maxEnergy
-    ) {
-      this.health = Math.max(0, this.health - 1);
-      updateStats();
-      if (this.health === 0) {
-        gameOver();
-      }
-    }
-
-    if (this.hunger === this.maxHunger && this.energy > 0) {
-      if (!this.healthIncreaseInterval) {
-        this.healthIncreaseInterval = setInterval(() => {
-          if (this.health < 7) {
-            this.health = Math.min(7, this.health + 1);
-            updateStats();
-          } else {
-            clearInterval(this.healthIncreaseInterval);
-            this.healthIncreaseInterval = null;
-          }
-        }, 1000);
-      }
-    } else {
-      if (this.healthIncreaseInterval) {
-        clearInterval(this.healthIncreaseInterval);
-        this.healthIncreaseInterval = null;
-      }
-    }
   }
 
   feed() {
