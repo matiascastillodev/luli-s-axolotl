@@ -1,83 +1,96 @@
 import { Pet } from "./pet.js";
 
 let pet;
+let startTime;
+let timerInterval;
 
 function nameSet() {
   const modal = document.querySelector("#gameStart");
-  modal.style.display = "block";
-  const setNameBtn = document.querySelector("#setNameBtn");
-  setNameBtn.addEventListener("click", () => {
-    const nameInput = document.querySelector("#nameInput").value;
-    if (nameInput) {
-      document.querySelector("#nameDisplay").textContent = nameInput;
-      modal.style.display = "none";
-      gameStart(nameInput);
-    }
-  });
+  const petState = JSON.parse(localStorage.getItem("petState"));
+
+  if (petState) {
+    document.querySelector("#nameDisplay").textContent = petState.name;
+    gameStart(petState.name);
+  } else {
+    modal.style.display = "block";
+    const setNameBtn = document.querySelector("#setNameBtn");
+    setNameBtn.addEventListener("click", () => {
+      const nameInput = document.querySelector("#nameInput").value;
+      if (nameInput) {
+        document.querySelector("#nameDisplay").textContent = nameInput;
+        modal.style.display = "none";
+        gameStart(nameInput);
+      }
+    });
+  }
 }
 
 nameSet();
 
 function gameStart(petName) {
   pet = new Pet(petName);
+  loadState(); //
 
   setInterval(() => {
     pet.hunger = Math.max(0, pet.hunger - 1);
+    saveState(); //
     updateStats();
   }, 14000);
 
   setInterval(() => {
     if (!pet.isSleeping) {
-      pet.energy = Math.max(0, pet.energy - 1);
+      energy = Math.max(0, pet.energy - 1);
+      saveState(); //
       updateStats();
     }
   }, 24000);
 
   setInterval(() => {
     checkHealth();
+    saveState(); //
   }, 1000);
 
   updateStats();
   startTimer();
 }
 
+function startTimer() {
+  if (!timerInterval) {
+    startTime = pet.startTime || Date.now();
+    pet.startTime = startTime;
+    saveState();
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+}
+
+function updateTimer() {
+  let elapsedTime = Date.now() - startTime;
+
+  let seconds = Math.floor((elapsedTime / 1000) % 60);
+  let minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+  let hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
+  let days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+
+  document.getElementById(
+    "timer"
+  ).innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
 function gameOver() {
   const modal = document.getElementById("gameOver");
   modal.style.display = "block";
-  pet.hunger = 7;
-  pet.health = 7;
-  pet.energy = 5;
   const restartBtn = document.getElementById("restartBtn");
+  pet.health = 7;
+  pet.hunger = 7;
+  pet.energy = 5;
   restartBtn.addEventListener("click", () => {
     modal.style.display = "none";
+    localStorage.removeItem("petState");
+    localStorage.clear();
+    window.location.reload();
     nameSet();
   });
 }
-
-// ----- GUI ----- //
-
-// let startTime;
-// let timerInterval;
-
-// function startTimer() {
-//   if (!timerInterval) {
-//     startTime = Date.now();
-//     timerInterval = setInterval(updateTimer, 1000);
-//   }
-// }
-
-// function updateTimer() {
-//   let elapsedTime = Date.now() - startTime;
-
-//   let seconds = Math.floor((elapsedTime / 1000) % 60);
-//   let minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
-//   let hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
-//   let days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
-
-//   document.getElementById(
-//     "timer"
-//   ).innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-// }
 
 function updateStats() {
   document.querySelector("#hungerBar").innerHTML = getStatImages(
@@ -217,9 +230,11 @@ function checkHealth() {
     hurtAudio.play();
 
     updateStats();
+
     if (pet.health === 0) {
       dieAudio.play();
       gameOver();
+      updateStats();
     }
   }
 
@@ -240,6 +255,32 @@ function checkHealth() {
       clearInterval(pet.healthIncreaseInterval);
       pet.healthIncreaseInterval = null;
     }
+  }
+}
+
+function saveState() {
+  const petState = {
+    name: pet.name,
+    hunger: pet.hunger,
+    health: pet.health,
+    energy: pet.energy,
+    isSleeping: pet.isSleeping,
+    startTime: pet.startTime,
+  };
+  localStorage.setItem("petState", JSON.stringify(petState));
+}
+
+function loadState() {
+  const petState = JSON.parse(localStorage.getItem("petState"));
+  if (petState) {
+    pet.name = petState.name;
+    pet.hunger = petState.hunger;
+    pet.health = petState.health;
+    pet.energy = petState.energy;
+    pet.isSleeping = petState.isSleeping;
+    pet.startTime = petState.startTime || Date.now();
+  } else {
+    pet.startTime = Date.now();
   }
 }
 
