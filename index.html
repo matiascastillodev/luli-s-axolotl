@@ -9,13 +9,13 @@
   <body>
     <div id="gameStart" class="modal">
       <div class="modal-content">
-        <h2>Enter Pet Name</h2>
-        <input type="text" id="petNameInput" placeholder="Enter pet name" />
-        <button id="setNameBtn">Set Name</button>
+        <h2>WELCOME</h2>
+        <input type="text" id="petNameInput" placeholder="ENTER PET NAME" />
+        <button id="setNameBtn">SET NAME</button>
       </div>
     </div>
 
-    <h1 id="petName">Axolotl</h1>
+    <h1 id="petName"></h1>
     <p>00:00:00</p>
     <div class="pet-display">
       <img src="images/Axolotl_Walk_Floor_Underwater.webp" alt="" class="pet" />
@@ -24,40 +24,13 @@
     <div class="statsContainer">
       <div class="statsRow">
         <div id="sleepBar">
-          <img src="images/Clock_texture_JE1_BE1.webp" alt="" />
+          <img src="" alt="" id="clock" />
         </div>
-        <div id="playBar">
-          <img src="images/Mob_Heart.webp" alt="" /><img
-            src="images/Mob_Heart.webp"
-            alt=""
-          /><img src="images/Mob_Heart.webp" alt="" />
-        </div>
+        <div id="playBar"></div>
       </div>
       <div class="statsRow">
-        <div id="healthBar">
-          <img src="images/Heart.webp" alt="" /><img
-            src="images/Heart.webp"
-            alt=""
-          /><img src="images/Heart.webp" alt="" /><img
-            src="images/Heart.webp"
-            alt=""
-          /><img src="images/Heart.webp" alt="" /><img
-            src="images/Heart.webp"
-            alt=""
-          /><img src="images/Heart.webp" alt="" />
-        </div>
-        <div id="hungerBar">
-          <img src="images/Hunger.webp" alt="" /><img
-            src="images/Hunger.webp"
-            alt=""
-          /><img src="images/Hunger.webp" alt="" /><img
-            src="images/Hunger.webp"
-            alt=""
-          /><img src="images/Hunger.webp" alt="" /><img
-            src="images/Hunger.webp"
-            alt=""
-          /><img src="images/Hunger.webp" alt="" />
-        </div>
+        <div id="healthBar"></div>
+        <div id="hungerBar"></div>
       </div>
     </div>
 
@@ -76,7 +49,6 @@
 
     <div id="gameOver" class="modal">
       <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
         <h2>Game Over</h2>
         <p>Your pet has died.</p>
         <button id="restartBtn">Restart</button>

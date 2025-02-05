@@ -1,8 +1,8 @@
 import { Pet } from "./pet.js";
 
-let pet;
 let mainImg = document.querySelector(".pet");
 
+let pet;
 const feedBtn = document.getElementById("feedBtn");
 const playBtn = document.getElementById("playBtn");
 const sleepBtn = document.getElementById("sleepBtn");
@@ -34,25 +34,6 @@ function toggleSleepIcon() {
   }
 }
 
-function updateStats() {
-  document.getElementById("hungerBar").innerHTML = getStatImages(
-    "Hunger.webp",
-    pet.hunger
-  );
-  document.getElementById("healthBar").innerHTML = getStatImages(
-    "Heart.webp",
-    pet.health
-  );
-  document.getElementById("playBar").innerHTML = getStatImages(
-    "Mob_Heart.webp",
-    pet.energy
-  );
-}
-
-function getStatImages(image, count) {
-  return Array(count).fill(`<img src="images/${image}" alt="">`).join("");
-}
-
 function updateButtonsState() {
   if (pet.isSleeping) {
     feedBtn.disabled = true;
@@ -61,6 +42,33 @@ function updateButtonsState() {
     feedBtn.disabled = false;
     playBtn.disabled = false;
   }
+}
+
+function updateStats() {
+  document.querySelector("#hungerBar").innerHTML = getStatImages(
+    "Hunger.webp",
+    pet.hunger
+  );
+  document.querySelector("#healthBar").innerHTML = getStatImages(
+    "Heart.webp",
+    pet.health
+  );
+  document.querySelector("#playBar").innerHTML = getStatImages(
+    "Mob_Heart.webp",
+    pet.energy
+  );
+  if (
+    (pet.energy === 0 && pet.isSleeping === false) ||
+    (pet.energy > 0 && pet.energy < 5 && pet.isSleeping === true)
+  ) {
+    document.querySelector("#clock").src = "images/Clock_night.png";
+  } else {
+    document.querySelector("#clock").src = "images/Clock_day.png";
+  }
+}
+
+function getStatImages(image, count) {
+  return Array(count).fill(`<img src="images/${image}" alt="">`).join("");
 }
 
 function gameOver() {
@@ -75,13 +83,13 @@ function gameOver() {
 }
 
 function resetGame() {
-  pet.hunger = 5;
+  pet.hunger = 7;
   pet.health = 7;
   pet.energy = 5;
-  gameStart();
+  nameSet();
 }
 
-function gameStart() {
+function nameSet() {
   const modal = document.getElementById("gameStart");
   modal.style.display = "block";
 
@@ -91,16 +99,16 @@ function gameStart() {
     if (petNameInput) {
       document.getElementById("petName").textContent = petNameInput;
       modal.style.display = "none";
-      startGame(petNameInput);
+      gameStart(petNameInput);
     }
   };
 }
 
-function startGame(petName) {
+function gameStart(petName) {
   pet = new Pet(petName);
   updateStats();
 }
 
-gameStart();
+nameSet();
 
 export { updateStats, gameOver };

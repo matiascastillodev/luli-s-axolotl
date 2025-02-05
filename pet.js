@@ -3,7 +3,7 @@ import { updateStats, gameOver } from "./script.js";
 class Pet {
   constructor(name) {
     this.name = name;
-    this.hunger = 5;
+    this.hunger = 7;
     this.health = 7;
     this.energy = 5;
     this.isSleeping = false;
