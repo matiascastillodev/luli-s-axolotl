@@ -134,18 +134,6 @@ let sleepAudio = document.querySelector("#sleepAudio");
 let hurtAudio = document.querySelector("#hurtAudio");
 let dieAudio = document.querySelector("#dieAudio");
 
-if (pet.play()) {
-  if (pet.energy > 0) {
-    playAudio.addEventListener("play", () => {
-      petAnimation.src = "images/Axolotl_Swim.webp";
-    });
-    playAudio.addEventListener("ended", () => {
-      petAnimation.src = normalState;
-    });
-    playAudio.play();
-  }
-}
-
 sleepAudio.loop = true;
 
 petAnimation.addEventListener("click", () => {
@@ -172,15 +160,15 @@ feedBtn.addEventListener("click", () => {
 });
 
 playBtn.addEventListener("click", () => {
-  // if (pet.energy > 0) {
-  //   playAudio.addEventListener("play", () => {
-  //     petAnimation.src = "images/Axolotl_Swim.webp";
-  //   });
-  //   playAudio.addEventListener("ended", () => {
-  //     petAnimation.src = normalState;
-  //   });
-  //   playAudio.play();
-  // }
+  if (pet.energy > 0) {
+    playAudio.addEventListener("play", () => {
+      petAnimation.src = "images/Axolotl_Swim.webp";
+    });
+    playAudio.addEventListener("ended", () => {
+      petAnimation.src = normalState;
+    });
+    playAudio.play();
+  }
   pet.play();
 });
 
