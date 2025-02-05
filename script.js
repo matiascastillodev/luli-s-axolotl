@@ -127,12 +127,13 @@ let petAnimation = document.querySelector(".petAnimation");
 let normalState = "images/Axolotl_Walk_Floor_Underwater.webp";
 petAnimation.src = normalState;
 
-let tapAudio = new Audio("audios/Axolotl_idle_air1.ogg");
-let feedAudio = new Audio("audios/Axolotl_attack1.ogg");
-let playAudio = new Audio("audios/Dolphin_swim1.ogg");
-let sleepAudio = new Audio("audios/Axolotl_idle1.ogg");
-let hurtAudio = new Audio("audios/Axolotl_hurt1.ogg");
-let dieAudio = new Audio("audios/Axolotl_death1.ogg");
+let tapAudio = document.querySelector("#tapAudio");
+let feedAudio = document.querySelector("#feedAudio");
+let playAudio = document.querySelector("#playAudio");
+let sleepAudio = document.querySelector("#sleepAudio");
+let hurtAudio = document.querySelector("#hurtAudio");
+let dieAudio = document.querySelector("#dieAudio");
+
 sleepAudio.loop = true;
 
 petAnimation.addEventListener("click", () => {
