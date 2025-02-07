@@ -123,9 +123,9 @@ const feedBtn = document.getElementById("feedBtn");
 const playBtn = document.getElementById("playBtn");
 const sleepBtn = document.getElementById("sleepBtn");
 
-let petAnimation = document.querySelector(".petAnimation");
+let petAnimation = document.querySelector("#petAnimation");
 let normalState = "images/Axolotl_Walk_Floor_Underwater.webp";
-petAnimation.src = normalState;
+petAnimation.style.backgroundImage = `url("${normalState}")`;
 
 let tapAudio = document.querySelector("#tapAudio");
 let feedAudio = document.querySelector("#feedAudio");
@@ -138,10 +138,11 @@ sleepAudio.loop = true;
 
 petAnimation.addEventListener("click", () => {
   tapAudio.addEventListener("play", () => {
-    petAnimation.src = "images/Axolotl_Walk_Floor.webp";
+    petAnimation.style.backgroundImage =
+      "url('images/Axolotl_Walk_Floor.webp')";
   });
   tapAudio.addEventListener("ended", () => {
-    petAnimation.src = normalState;
+    petAnimation.style.backgroundImage = `url("${normalState}")`;
   });
   tapAudio.play();
 });
@@ -149,10 +150,11 @@ petAnimation.addEventListener("click", () => {
 feedBtn.addEventListener("click", () => {
   if (pet.hunger < pet.maxHunger && pet.hunger > 0) {
     feedAudio.addEventListener("play", () => {
-      petAnimation.src = "images/Axolotl_Idle_Floor.webp";
+      petAnimation.style.backgroundImage =
+        "url('images/Axolotl_Idle_Floor.webp')";
     });
     feedAudio.addEventListener("ended", () => {
-      petAnimation.src = normalState;
+      petAnimation.style.backgroundImage = `url("${normalState}")`;
     });
     feedAudio.play();
   }
@@ -162,10 +164,10 @@ feedBtn.addEventListener("click", () => {
 playBtn.addEventListener("click", () => {
   if (pet.energy > 0) {
     playAudio.addEventListener("play", () => {
-      petAnimation.src = "images/Axolotl_Swim.webp";
+      petAnimation.style.backgroundImage = "url('images/Axolotl_Swim.webp')";
     });
     playAudio.addEventListener("ended", () => {
-      petAnimation.src = normalState;
+      petAnimation.style.backgroundImage = `url("${normalState}")`;
     });
     playAudio.play();
   }
@@ -176,12 +178,13 @@ sleepBtn.addEventListener("click", () => {
   pet.sleep();
 
   if (pet.isSleeping) {
-    petAnimation.src = "images/Axolotl_Idle_Underwater.webp";
+    petAnimation.style.backgroundImage =
+      "url('images/Axolotl_Idle_Underwater.webp')";
     sleepAudio.play();
   } else {
     sleepAudio.pause();
     sleepAudio.currentTime = 0;
-    petAnimation.src = normalState;
+    petAnimation.style.backgroundImage = `url("${normalState}")`;
   }
   toggleSleepIcon();
   disableActionsWhenAsleep();
@@ -223,10 +226,11 @@ function checkHealth() {
     pet.health = Math.max(0, pet.health - 1);
 
     hurtAudio.addEventListener("play", () => {
-      petAnimation.src = "images/Axolotl_Walk_Floor.webp";
+      petAnimation.style.backgroundImage =
+        "url('images/Axolotl_Walk_Floor.webp')";
     });
     hurtAudio.addEventListener("ended", () => {
-      petAnimation.src = normalState;
+      petAnimation.src = `url("${normalState}")`;
     });
     hurtAudio.play();
 
